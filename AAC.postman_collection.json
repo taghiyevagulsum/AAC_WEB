@@ -1,0 +1,771 @@
+{
+	"info": {
+		"_postman_id": "6b88735d-f09a-430f-be20-a35282164130",
+		"name": "AAC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38981817"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/addCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Places\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/addCategory",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								"addCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"Places}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/getAll",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/get/685e647ebd0fb96cad0e9368",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"Places}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/get/685e647ebd0fb96cad0e9368",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								"get",
+								"685e647ebd0fb96cad0e9368"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/update/685e647ebd0fb96cad0e9368",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"Family\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/update/685e647ebd0fb96cad0e9368",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								"update",
+								"685e647ebd0fb96cad0e9368"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/addByUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\" : \"685e62f9bd0fb96cad0e9365\",\n    \"name\" : \"Family\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/addByUser",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								"addByUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/delete/685e64eebd0fb96cad0e936a",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"Places}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/categories/delete/685e64eebd0fb96cad0e936a",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								"delete",
+								"685e64eebd0fb96cad0e936a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/auth/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"test3user122\",\n    \"email\": \"tes3t2user@example.com\",\n    \"password\": \"Gulsum123$$\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/auth/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tes3t2user@example.com\",\n    \"password\": \"Gulsum123$$\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXMzdDJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzUxMzA3MTA1LCJleHAiOjE3NTEzOTM1MDV9.NzVwEz6M5pu1Ca6xAMItzoRWc0b-b4msXYxOs9zoRrQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\" : \"markjohnson@mail.com\",\n\"firstName\" : \"Mark\",\n\"lastName\" : \"Johnson\"}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/getAll",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/get/685e62e1bd0fb96cad0e9364",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXMzdDJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzUxMzA3MTA1LCJleHAiOjE3NTEzOTM1MDV9.NzVwEz6M5pu1Ca6xAMItzoRWc0b-b4msXYxOs9zoRrQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\" : \"markjohnson@mail.com\",\n\"firstName\" : \"Mark\",\n\"lastName\" : \"Johnson\"}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/get/685e62d5bd0fb96cad0e9363",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"get",
+								"685e62d5bd0fb96cad0e9363"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/update/685e62e1bd0fb96cad0e9364",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMWVtYWlsQGV4YW1wbGUuY29tIiwiaWF0IjoxNzUxMDE2MDcyLCJleHAiOjE3NTExMDI0NzJ9.IY4cKkjbB8KbgOQ0WPf4pudMfb0a5zHdRPRN7dO8mqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\" : \"markjohnson@mail.com\",\n\"firstName\" : \"Janet\",\n\"lastName\" : \"Johnson\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/update/685e62e1bd0fb96cad0e9364",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"update",
+								"685e62e1bd0fb96cad0e9364"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/delete/685e62e1bd0fb96cad0e9364",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMWVtYWlsQGV4YW1wbGUuY29tIiwiaWF0IjoxNzUxMDE2MDcyLCJleHAiOjE3NTExMDI0NzJ9.IY4cKkjbB8KbgOQ0WPf4pudMfb0a5zHdRPRN7dO8mqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\" : \"markjohnson@mail.com\",\n\"firstName\" : \"Janet\",\n\"lastName\" : \"Johnson\"}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/users/delete/685e62e1bd0fb96cad0e9364",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"delete",
+								"685e62e1bd0fb96cad0e9364"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vocabulary",
+			"item": [
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\" : \"banana1\",\n\"category\" : {\n    \"id\" : \"685e6476bd0fb96cad0e9367\"\n}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{globalBaseUrl}}/vocabulary/create",
+							"host": [
+								"{{globalBaseUrl}}"
+							],
+							"path": [
+								"vocabulary",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/createByUser/685e6388bd0fb96cad0e9366",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\": \"Shorts\",\n\"categoryId\" : \"685e647ebd0fb96cad0e9368\",\n\"userId\" : \"685e62f9bd0fb96cad0e9365\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/createByUser/685e6388bd0fb96cad0e9366",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"vocabulary",
+								"createByUser",
+								"685e6388bd0fb96cad0e9366"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\": \"Shorts\",\n\"categoryId\" : \"685e647ebd0fb96cad0e9368\",\n\"userId\" : \"685e62f9bd0fb96cad0e9365\"}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/getAll",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"vocabulary",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/get/685e6919bd0fb96cad0e9372",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\": \"Shorts\",\n\"categoryId\" : \"685e647ebd0fb96cad0e9368\",\n\"userId\" : \"685e62f9bd0fb96cad0e9365\"}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/get/685e6919bd0fb96cad0e9372",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"vocabulary",
+								"get",
+								"685e6919bd0fb96cad0e9372"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/update/685e6919bd0fb96cad0e9372",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\": \"Skirts\",\n\"categoryId\" : \"685e647ebd0fb96cad0e9368\",\n\"userId\" : \"685e62f9bd0fb96cad0e9365\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/update/685e6919bd0fb96cad0e9372",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"vocabulary",
+								"update",
+								"685e6919bd0fb96cad0e9372"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/delete/685e699ebd0fb96cad0e9374",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMWVtYWlsQGV4YW1wbGUuY29tIiwiaWF0IjoxNzUxMDE2MDcyLCJleHAiOjE3NTExMDI0NzJ9.IY4cKkjbB8KbgOQ0WPf4pudMfb0a5zHdRPRN7dO8mqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\": \"Shorts\",\n\"categoryId\" : \"685e647ebd0fb96cad0e9368\",\n\"userId\" : \"685e62f9bd0fb96cad0e9365\"}"
+						},
+						"url": {
+							"raw": "https://goldfish-app-un8nb.ondigitalocean.app/api/vocabulary/delete/685e699ebd0fb96cad0e9374",
+							"protocol": "https",
+							"host": [
+								"goldfish-app-un8nb",
+								"ondigitalocean",
+								"app"
+							],
+							"path": [
+								"api",
+								"vocabulary",
+								"delete",
+								"685e699ebd0fb96cad0e9374"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "globalBaseUrl",
+			"value": "https://goldfish-app-un8nb.ondigitalocean.app/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXMzdDJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzUxMzA3MjUzLCJleHAiOjE3NTEzOTM2NTN9.Yc_yXIbSEt9TobufV_Rf50Dsa8wcQhi27zcrNg_CGbg",
+			"type": "string"
+		}
+	]
+}
