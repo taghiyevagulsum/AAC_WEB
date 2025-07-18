@@ -18,11 +18,37 @@ const email = ref('');
 const password = ref('');
 const router = useRouter();
 
-const handleLogin = () => {
-  // In a real application, you would send a request to your backend here
-  // For now, we'll just navigate to the AAC interface
+const API_BASE_URL = 'http://localhost:8080/api';
+
+const handleLogin = async () => {
   console.log('Attempting to log in with:', email.value, password.value);
-  router.push('/aac');
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('Login successful! Token:', data.token);
+    // Store the token (e.g., in localStorage or a Vuex store)
+    localStorage.setItem('jwt_token', data.token);
+    router.push('/aac');
+  } catch (error) {
+    console.error('Login failed:', error);
+    alert('Login failed. Please check your credentials.');
+  }
 };
 
 onMounted(() => {

@@ -2,120 +2,111 @@
   <div class="aac-interface">
     <header class="header-bar">
       <div class="sentence-strip-container">
-        <div class="sentence-strip">{{ sentenceStrip }}</div>
+        <div class="sentence-strip">
+        <span v-for="(word, index) in sentenceStrip" :key="index">{{ word.text }} </span>
+      </div>
         <button class="erase-button" @click="eraseLastWord">X</button>
       </div>
       <button class="speak-button" @click="speakSentence">
-          <img src="/speaker-icon.svg" alt="Speak" class="icon" />
-        </button>
-        <div class="controls">
-          <button class="control-button">
-            <img src="/grid-icon.svg" alt="Grid Size" class="icon" />
-          </button>
-          <button class="control-button" @click="openModal">
-            <img src="/add-edit-icon.svg" alt="Add/Edit Mode" class="icon" />
-          </button>
-          <button class="control-button">
-            <img src="/logout-icon.svg" alt="Logout" class="icon" />
+        <img src="/speaker-icon.svg" alt="Speak" class="icon" />
+      </button>
+      <div class="controls">
+        
+        
+        
+        <button class="control-button" @click="logout">
+          <img src="/logout-icon.svg" alt="Logout" class="icon" />
         </button>
       </div>
     </header>
     <main class="main-grid-area">
       <div v-if="currentView === 'home'" class="grid-container">
+        <div v-for="word in uncategorizedWords" :key="word.id" class="card word-card" @click="addWordToSentence(word)">
+          <img :src="word.imageUrl || '/word-icon.svg'" :alt="word.text" class="card-icon" />
+          <span class="card-label">{{ word.text }}</span>
+        </div>
         <div v-for="category in categories" :key="category.id" class="card category-card" @click="navigateToCategory(category.id)">
           <img src="/folder-icon.svg" alt="Category" class="card-icon" />
           <span class="card-label">{{ category.name }}</span>
         </div>
       </div>
 
-      <div v-else-if="currentView === 'category'" class="grid-container">
-        <button @click="navigateHome" class="back-button">Back to Home</button>
-        <div v-for="word in currentCategoryWords" :key="word.id" class="card word-card" @click="addWordToSentence(word.text)">
+      <div v-else-if="currentView === 'category'">
+        <div class="back-button-container">
+          <button @click="navigateHome" class="back-button control-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          </button>
+        </div>
+        <div class="grid-container">
+        <div v-for="word in currentCategoryWords" :key="word.id" class="card word-card" @click="addWordToSentence(word)">
           <img :src="word.imageUrl || '/word-icon.svg'" :alt="word.text" class="card-icon" />
           <span class="card-label">{{ word.text }}</span>
         </div>
       </div>
+      </div>
     </main>
 
     <AddEditModal
-      :isVisible="isModalVisible"
-      :isEditMode="false"
-      :categories="categories"
-      @close="closeModal"
-      @save="handleSave"
+        :isVisible="isModalVisible"
+        :isEditMode="false"
+        :categories="categories"
+        @close="closeModal"
+        @save="handleSave"
     />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AddEditModal from '../components/AddEditModal.vue';
+import { useRouter } from 'vue-router';
 
-const sentenceStrip = ref('');
+
+
+const sentenceStrip = ref([]);
 const vocabulary = ref([]);
 const categories = ref([]);
+const uncategorizedWords = ref([]);
 const currentView = ref('home'); // 'home' or 'category'
 const currentCategoryWords = ref([]);
-const isModalVisible = ref(false);
-
-const openModal = () => {
-  isModalVisible.value = true;
-};
-
-const closeModal = () => {
-  isModalVisible.value = false;
-};
-
-const saveItemToBackend = async (item) => {
-  const url = item.itemType === 'word' ? `${API_BASE_URL}/vocabulary/add` : `${API_BASE_URL}/categories/add`;
-  const body = item.itemType === 'word' ? {
-    text: item.itemName,
-    imageUrl: item.imageUrl,
-    category: { id: item.selectedCategory }
-  } : {
-    name: item.itemName,
-    imageUrl: item.imageUrl
-  };
-
-  console.log('Sending body:', body);
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${AUTH_TOKEN}`,
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
-    }
-    const data = await response.json();
-    console.log(`${item.itemType} saved successfully! Response:`, data);
-  } catch (error) {
-    console.error(`Error saving ${item.itemType}:`, error);
-  }
-};
-
-const handleSave = async (item) => {
-  await saveItemToBackend(item);
-  fetchVocabulary();
-  fetchCategories();
-};
 
 const API_BASE_URL = 'http://localhost:8080/api';
 // const API_BASE_URL = 'https://goldfish-app-un8nb.ondigitalocean.app/api';
-const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN1c2VyQG1haWwuY29tIiwiaWF0IjoxNzUyNTkyODMzLCJleHAiOjE3NTI2NzkyMzN9.MthoLopyAqLBpdIRCHzgCm0s16HEr400pa5cmEZmhbU'; // Replace with dynamic token from login
+
+// Function to retrieve the authentication token
+// In a real application, this would fetch from localStorage/sessionStorage
+// and handle token refresh if necessary.
+const getAuthToken = () => {
+  const token = localStorage.getItem('jwt_token'); // Assuming you store the token here after login
+  if (token) {
+    return token;
+  } else {
+    console.warn("Authentication token not found. Please ensure you are logged in.");
+    // Optionally, redirect to a login page or show a prominent login prompt
+    // router.push('/login'); // If you are using Vue Router
+    return null;
+  }
+};
+
+
+const isModalVisible = ref(false);
+
+
 
 const fetchCategories = async () => {
+  const token = getAuthToken();
+  if (!token) {
+    console.error("Cannot fetch categories: No authentication token available.");
+    return; // Stop execution if no token
+  }
+
   try {
     console.log('Fetching categories...');
     const response = await fetch(`${API_BASE_URL}/categories/getAll`, {
       headers: {
-        'Authorization': `Bearer ${AUTH_TOKEN}`,
+        'Authorization': `Bearer ${token}`, // Use the dynamically retrieved token
       },
     });
     if (!response.ok) {
@@ -131,11 +122,17 @@ const fetchCategories = async () => {
 };
 
 const fetchVocabulary = async () => {
+  const token = getAuthToken();
+  if (!token) {
+    console.error("Cannot fetch vocabulary: No authentication token available.");
+    return; // Stop execution if no token
+  }
+
   try {
     console.log('Fetching vocabulary...');
     const response = await fetch(`${API_BASE_URL}/vocabulary/getAll`, {
       headers: {
-        'Authorization': `Bearer ${AUTH_TOKEN}`,
+        'Authorization': `Bearer ${token}`, // Use the dynamically retrieved token
       },
     });
     if (!response.ok) {
@@ -144,30 +141,44 @@ const fetchVocabulary = async () => {
     }
     const data = await response.json();
     vocabulary.value = data;
+    uncategorizedWords.value = data.filter(word => !word.category);
     console.log('Vocabulary fetched:', vocabulary.value);
+    console.log('Uncategorized words:', uncategorizedWords.value);
   } catch (error) {
     console.error('Error fetching vocabulary:', error);
   }
 };
 
 const addWordToSentence = (word) => {
-  sentenceStrip.value += (sentenceStrip.value ? ' ' : '') + word;
+  console.log("Adding word to sentence strip:", word);
+  sentenceStrip.value.push(word);
 };
 
 const eraseLastWord = () => {
-  const words = sentenceStrip.value.split(' ');
-  words.pop();
-  sentenceStrip.value = words.join(' ');
+  sentenceStrip.value.pop();
 };
 
-const speakSentence = () => {
-  if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(sentenceStrip.value);
-    window.speechSynthesis.speak(utterance);
-  } else {
-    alert('Text-to-speech not supported in this browser.');
+const speakSentence = async () => {
+  for (const word of sentenceStrip.value) {
+    if (word.voiceUrl) {
+      try {
+        const audio = new Audio(word.voiceUrl);
+        await new Promise((resolve, reject) => {
+          audio.onended = resolve;
+          audio.onerror = (e) => {
+            console.error("Audio error event:", e);
+            reject(new Error("Audio playback error."));
+          };
+          audio.play();
+        });
+      } catch (error) {
+        console.error("Error playing audio:", error);
+      }
+    }
   }
 };
+
+
 
 const navigateToCategory = (categoryId) => {
   currentCategoryWords.value = vocabulary.value.filter(word => word.category && word.category.id === categoryId);
@@ -175,16 +186,27 @@ const navigateToCategory = (categoryId) => {
 };
 
 const navigateHome = () => {
+  console.log("Navigating back to home.");
   currentView.value = 'home';
 };
 
+const router = useRouter();
+
+const logout = () => {
+  localStorage.removeItem('jwt_token');
+  router.push('/');
+};
+
 onMounted(() => {
+  // Attempt to get token on mount. Calls will only proceed if a token is found.
+  getAuthToken();
   fetchCategories();
   fetchVocabulary();
 });
 </script>
 
 <style scoped>
+/* Styles remain the same as provided */
 .aac-interface {
   display: flex;
   flex-direction: column;
@@ -220,6 +242,7 @@ onMounted(() => {
   font-size: 1.2em;
   display: flex;
   align-items: center;
+  color: black; /* Ensure visibility */
 }
 
 .erase-button {
@@ -325,13 +348,25 @@ onMounted(() => {
   color: #333;
 }
 
-.back-button {
-  background-color: #6c757d;
+.back-button-container {
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
-  align-self: flex-start;
+}
+
+.back-button {
+  background-color: #a7d9ff; /* Pastel blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .back-button:hover {
-  background-color: #5a6268;
+  background-color: #8ac8ff;
 }
 </style>

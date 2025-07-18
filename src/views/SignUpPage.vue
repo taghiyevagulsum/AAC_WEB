@@ -20,11 +20,58 @@ const email = ref('');
 const password = ref('');
 const router = useRouter();
 
-const handleSignUp = () => {
-  // In a real application, you would send a request to your backend here
-  // For now, we'll just navigate to the AAC interface
+const API_BASE_URL = 'http://localhost:8080/api';
+
+const handleSignUp = async () => {
   console.log('Attempting to sign up with:', name.value, email.value, password.value);
-  router.push('/aac');
+
+  try {
+    // 1. Register the user
+    const registerResponse = await fetch(`${API_BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      }),
+    });
+
+    if (!registerResponse.ok) {
+      const errorText = await registerResponse.text();
+      throw new Error(`Registration failed: HTTP error! status: ${registerResponse.status}, message: ${errorText}`);
+    }
+
+    console.log('Registration successful!');
+
+    // 2. Automatically log in the user after successful registration
+    const loginResponse = await fetch(`${API_BASE_URL}/auth/authenticate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+    });
+
+    if (!loginResponse.ok) {
+      const errorText = await loginResponse.text();
+      throw new Error(`Login failed after registration: HTTP error! status: ${loginResponse.status}, message: ${errorText}`);
+    }
+
+    const data = await loginResponse.json();
+    console.log('Login successful after registration! Token:', data.token);
+    localStorage.setItem('jwt_token', data.token);
+    router.push('/aac');
+
+  } catch (error) {
+    console.error('Sign up process failed:', error);
+    alert(`Sign up failed: ${error.message}`);
+  }
 };
 </script>
 
