@@ -7,16 +7,15 @@
       </div>
         <button class="erase-button" @click="eraseLastWord">X</button>
       </div>
-      <button class="speak-button" @click="speakSentence">
-        <img src="/speaker-icon.svg" alt="Speak" class="icon" />
-      </button>
-      <div class="controls">
-        
-        
-        
-        <button class="control-button" @click="logout">
-          <img src="/logout-icon.svg" alt="Logout" class="icon" />
+      <div class="button-group">
+        <button class="speak-button" @click="speakSentence">
+          <img src="/speaker-icon.svg" alt="Speak" class="icon" />
         </button>
+        <div class="controls">
+          <button class="control-button" @click="logout">
+            <img src="/logout-icon.svg" alt="Logout" class="icon" />
+          </button>
+        </div>
       </div>
     </header>
     <main class="main-grid-area">
@@ -242,6 +241,8 @@ onMounted(() => {
   font-size: 1.2em;
   display: flex;
   align-items: center;
+  flex-wrap: wrap; /* Allow words to wrap */
+  gap: 5px; /* Space between words */
   color: black; /* Ensure visibility */
 }
 
@@ -276,6 +277,12 @@ onMounted(() => {
 
 .controls {
   display: flex;
+  gap: 10px;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
   gap: 10px;
   margin-left: auto;
 }
