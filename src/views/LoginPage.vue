@@ -62,6 +62,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh; /* Ensure it takes full viewport height */
   background-color: white;
   text-align: center;
   padding: 20px;
