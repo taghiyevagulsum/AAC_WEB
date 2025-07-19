@@ -25,7 +25,7 @@
           <span class="card-label">{{ word.text }}</span>
         </div>
         <div v-for="category in categories" :key="category.id" class="card category-card" @click="navigateToCategory(category.id)">
-          <img src="/folder-icon.svg" alt="Category" class="card-icon" />
+          <img :src="category.imageUrl || '/folder-icon.svg'" :alt="category.name" class="card-icon" />
           <span class="card-label">{{ category.name }}</span>
         </div>
       </div>
